@@ -19,11 +19,15 @@ function mostrarSorpresa() {
 // Carrusel automático con frases
 let indice = 0;
 const imagenes = document.querySelectorAll(".carrusel img");
-const frases = [
-  "Contigo todo es mejor 💖",
-  "Eres mi razón de sonreír 🌹",
-  "Cada día te quiero más ✨",
-  "Mi lugar favorito es a tu lado 💕"
+const frases=[
+  "Contigo todo es mejor 💕",
+  "Eres mi alegría 🌹",
+  "Siempre en mi corazón ✨",
+  "Mi lugar favorito: a tu lado 💖",
+  "Tu sonrisa ilumina mi día 🌼",
+  "Cada instante contigo es único 💎",
+  "Te pienso, te extraño, te amo 💘",
+  "Eres mi razón de vivir 🌙"
 ];
 
 // Funciones para swipe táctil
