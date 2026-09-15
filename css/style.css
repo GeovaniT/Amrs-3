@@ -1,22 +1,33 @@
 :root {
-  --color-fondo: #FFF9E6;     /* crema cálido */
-  --color-primario: #F4A261;  /* naranja suave */
-  --color-secundario: #E9C46A;/* dorado claro */
-  --color-texto: #3E2C23;     /* marrón oscuro */
-  --color-romantico: #FFB5A7; /* rosa pastel */
+  --color-fondo: #FFFDF0;          /* Crema suave y limpio */
+  --color-primario: #D93856;       /* Carmesí cálido para máxima legibilidad */
+  --color-secundario: #E0A025;     /* Amarillo girasol vibrante */
+  --color-texto: #331E17;          /* Café muy oscuro para lecturas claras */
+  --color-romantico: #E63946;      /* Rojo/Rosa vivo para corazones */
+  --color-tarjeta: rgba(255, 255, 255, 0.9); /* Blanco semitransparente */
+  --color-boton: #E0A025;
+  --color-boton-hover: #C88A1A;
 }
+
 
 body {
   font-family: 'Poppins', sans-serif;
   text-align: center;
   margin: 0;
   color: var(--color-texto);
-  background: linear-gradient(to bottom, #FFF9E6, #FFE8A3);
+  background: linear-gradient(180deg, #FFFDF0 0%, #FFF3B0 100%);
   overflow: hidden;
 }
-
+h1 {
+  color: var(--color-primario);
+  margin-top: 30px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  font-family: 'Great Vibes', cursive;
+  font-size: 3em;
+}
 /* Títulos */
-h1, h2 {
+h2 {
   color: var(--color-primario);
   margin-top: 30px;
   text-shadow: 0 0 4px rgba(255,255,255,0.6);
@@ -24,13 +35,17 @@ h1, h2 {
 
 /* Mensajes */
 .mensaje {
-  margin: 20px auto;
-  font-size: 1.2em;
-  background: rgba(255,255,255,0.7);
-  padding: 10px 15px;
-  border-radius: 10px;
+  margin: 15px auto;
+  font-size: 1.1em;
+  font-weight: 500;
+  background: var(--color-tarjeta);
+  color: var(--color-texto);
+  padding: 12px 18px;
+  border-radius: 12px;
   width: 80%;
   line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(224, 160, 37, 0.2);
 }
 
 /* Corazón animado */
@@ -75,9 +90,10 @@ button:hover {
 /* Imágenes adaptables */
 .carrusel img {
   width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.2);
+  height: 380px;            /* Altura fija uniforme */
+  object-fit: cover;        /* Cubre el contenedor sin deformar la foto */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   display: none;
 }
 .carrusel img.active {
@@ -87,22 +103,25 @@ button:hover {
 /* Botón visible y centrado */
 button {
   position: relative;
-  z-index: 10; /* asegura que quede encima del carrusel */
-  background: var(--color-secundario);
-  color: var(--color-texto);
-  font-weight: bold;
+  z-index: 10;
+  background: var(--color-boton);
+  color: #FFFFFF;           /* Texto blanco para máximo contraste */
+  font-size: 1.05em;
+  font-weight: 700;
   border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 14px 28px;
+  border-radius: 25px;
   cursor: pointer;
   margin: 20px auto;
   display: block;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: background 0.3s ease;
+  box-shadow: 0 4px 14px rgba(224, 160, 37, 0.4);
+  transition: all 0.3s ease;
 }
+
 button:hover {
-  background: var(--color-primario);
-  color: #fff;
+  background: var(--color-boton-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(224, 160, 37, 0.5);
 }
 
 /* Ajuste responsive */
@@ -147,58 +166,168 @@ button:hover {
   100% { transform: translateY(-10vh) scale(1); opacity: 0; }
 }
 
-/* Overlay borroso */
+/* Contenedor del fondo oscuro/desenfocado */
 #overlay {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  backdrop-filter: blur(8px);
-  background: rgba(0,0,0,0.3);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(20, 10, 15, 0.55); /* Oscurece el fondo para dar protagonismo */
   z-index: 999;
 }
 
-/* Mensaje final */
+/* Tarjeta elegante para el mensaje final */
 #mensajeFinal {
   display: none;
   position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(1);
-  font-size: 3em;
-  color: var(--color-romantico);
-  text-shadow: 0 0 15px #fff, 0 0 30px var(--color-romantico);
-  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-width: 420px;
+  box-sizing: border-box;
+  padding: 35px 25px;
+  background: rgba(255, 253, 240, 0.95); /* Fondo crema claro altamente legible */
+  border: 2px solid var(--color-secundario);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 25px rgba(224, 160, 37, 0.3);
   text-align: center;
-  white-space: nowrap; /* evita que se corte el texto */
-  animation: aparecerZoom 3s forwards, pulsoZoom 4s infinite ease-in-out, brilloSuave 3s infinite alternate;
   z-index: 1000;
+  animation: aparecerConZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Aparición inicial */
-@keyframes aparecerZoom {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+/* Ajustes para el contenedor del mensaje */
+#mensajeFinal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-width: 380px;
+  box-sizing: border-box;
+  padding: 30px 20px;
+  background: rgba(255, 253, 240, 0.98);
+  border: 2px solid var(--color-secundario);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 25px rgba(224, 160, 37, 0.3);
+  text-align: center;
+  z-index: 1000;
+  animation: aparecerConZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Pulso suave (acercarse y alejarse) */
-@keyframes pulsoZoom {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  50% { transform: translate(-50%, -50%) scale(1.1); }
-  100% { transform: translate(-50%, -50%) scale(1); }
+/* Formato para la primera línea */
+#mensajeFinal .linea-1 {
+  margin: 0 0 10px 0;
+  font-size: 2.2em;
+  font-weight: 700;
+  color: var(--color-secundario); /* Tono dorado/amarillo cálido */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+/* Tarjeta principal con animación de latido continuo */
+#mensajeFinal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  max-width: 380px;
+  box-sizing: border-box;
+  padding: 35px 20px;
+  background: rgba(255, 253, 240, 0.98);
+  border: 2px solid var(--color-secundario);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 30px rgba(224, 160, 37, 0.4);
+  text-align: center;
+  z-index: 1000;
+  /* La tarjeta aparece con zoom y luego se queda latiendo suavemente */
+  animation: entradaZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+             latidoTarjeta 3s ease-in-out infinite alternate 0.8s;
 }
 
-/* Brillo intermitente */
-@keyframes brilloSuave {
-  0% { text-shadow: 0 0 10px #fff, 0 0 20px var(--color-romantico); }
-  100% { text-shadow: 0 0 25px #fff, 0 0 40px var(--color-romantico); }
+/* Línea 1: TE AMO con destello de luz */
+#mensajeFinal .linea-1 {
+  margin: 0 0 8px 0;
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--color-secundario);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: brilloTexto 2s ease-in-out infinite alternate;
 }
 
-/* Ajuste responsive para móviles */
-@media (max-width: 600px) {
-  #mensajeFinal {
-    font-size: 2em; /* reduce tamaño para pantallas pequeñas */
-    white-space: normal; /* permite que el texto se acomode en varias líneas */
-    line-height: 1.3;
-    padding: 0 10px;
+/* Línea 2: Nombre destacado */
+#mensajeFinal .linea-2 {
+  margin: 0 0 10px 0;
+  font-size: 2.6em;
+  font-weight: 800;
+  color: var(--color-primario);
+  text-shadow: 0 2px 6px rgba(217, 56, 86, 0.2);
+}
+
+/* Subtexto cariñoso opcional */
+#mensajeFinal .linea-sub {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--color-texto);
+  opacity: 0.85;
+}
+
+/* Adornos en las 4 esquinas de la tarjeta */
+#mensajeFinal .adorno {
+  position: absolute;
+  font-size: 20px;
+  animation: flotarAdorno 2s ease-in-out infinite alternate;
+}
+.adorno-tl { top: 12px; left: 15px; }
+.adorno-tr { top: 12px; right: 15px; animation-delay: 0.5s; }
+.adorno-bl { bottom: 12px; left: 15px; animation-delay: 1s; }
+.adorno-br { bottom: 12px; right: 15px; animation-delay: 1.5s; }
+
+/* Keyframes de animaciones */
+
+/* 1. Entrada fluida */
+@keyframes entradaZoom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4);
   }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* 2. Latido constante de la tarjeta */
+@keyframes latidoTarjeta {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 20px rgba(224, 160, 37, 0.3);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 35px rgba(224, 160, 37, 0.6);
+  }
+}
+
+/* 3. Brillo en el texto */
+@keyframes brilloTexto {
+  0% { opacity: 0.85; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+  100% { opacity: 1; text-shadow: 0 0 12px rgba(224, 160, 37, 0.8); }
+}
+
+/* 4. Movimiento de adornos */
+@keyframes flotarAdorno {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-5px) rotate(10deg); }
+}
+
+@media (max-width: 600px) {
+  #mensajeFinal .linea-1 { font-size: 1.8em; }
+  #mensajeFinal .linea-2 { font-size: 2.2em; }
 }

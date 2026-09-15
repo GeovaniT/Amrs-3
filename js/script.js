@@ -91,23 +91,27 @@ function crearFlor() {
 setInterval(crearFlor, 2500);
 
 function lluviaSorpresa() {
-  for(let i=0; i<50; i++){
-    setTimeout(() => {
-      const elemento = document.createElement("div");
-      elemento.style.position = "absolute";
-      elemento.style.left = Math.random() * window.innerWidth + "px";
-      elemento.style.top = Math.random() * window.innerHeight + "px";
-      elemento.style.fontSize = "25px";
-      elemento.style.animation = "flotar 6s linear infinite";
-      elemento.innerHTML = Math.random() > 0.5 ? "❤️" : "✨";
-      document.body.appendChild(elemento);
-      setTimeout(() => { elemento.remove(); }, 6000);
-    }, i*100);
-  }
+  // Muestra inmediatamente el mensaje y su fondo
+  document.getElementById("overlay").style.display = "block";
+  document.getElementById("mensajeFinal").style.display = "block";
 
-  // Mostrar overlay y mensaje final
-  setTimeout(() => {
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("mensajeFinal").style.display = "block";
-  }, 6000);
+  // Genera la lluvia de elementos al instante
+  for (let e = 0; e < 50; e++) {
+    setTimeout(() => {
+      const t = document.createElement("div");
+      t.style.position = "fixed";
+      t.style.left = Math.random() * window.innerWidth + "px";
+      t.style.top = Math.random() * window.innerHeight + "px";
+      t.style.fontSize = "28px";
+      t.style.zIndex = "999"; // Detrás de la tarjeta, delante del overlay
+      t.style.animation = "flotar 6s linear infinite";
+      t.innerHTML = Math.random() > 0.5 ? "❤️" : "✨";
+
+      document.body.appendChild(t);
+
+      setTimeout(() => {
+        t.remove();
+      }, 6000);
+    }, 80 * e);
+  }
 }
