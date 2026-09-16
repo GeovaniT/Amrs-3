@@ -331,3 +331,100 @@ button:hover {
   #mensajeFinal .linea-1 { font-size: 1.8em; }
   #mensajeFinal .linea-2 { font-size: 2.2em; }
 }
+
+/* Estilo para el botón de cerrar */
+.btn-cerrar {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  background: rgba(217, 56, 86, 0.15) !important;
+  color: #D93856 !important;
+  border: none !important;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+  z-index: 1002 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.btn-cerrar:hover {
+  background: #D93856 !important;
+  color: #FFFFFF !important;
+  transform: scale(1.1);
+}
+
+/* Animación optimizada mediante aceleración de hardware */
+.elemento-lluvia {
+  position: fixed;
+  top: -40px;
+  font-size: 24px;
+  z-index: 999;
+  pointer-events: none;
+  will-change: transform, opacity; /* Le avisa al celular que prepare la GPU */
+  animation: CaidaFluida 6s linear infinite;
+}
+
+@keyframes CaidaFluida {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Reducir el filtro blur en celulares para liberar la GPU */
+@media (max-width: 600px) {
+  #overlay {
+    backdrop-filter: blur(3px) !important; /* Disminuir desenfoque pesado */
+    -webkit-backdrop-filter: blur(3px) !important;
+  }
+}
+
+/* Garantiza que la tarjeta y el botón queden sobre todo */
+/* 1. Fondo oscuro al fondo de la sorpresa */
+#overlay {
+  z-index: 998 !important;
+}
+
+/* 2. Lluvia por encima del fondo oscuro pero detrás de la tarjeta */
+.elemento-lluvia {
+  z-index: 999 !important;
+  pointer-events: none !important;
+}
+
+/* 3. Tarjeta por encima de la lluvia */
+#mensajeFinal {
+  position: fixed !important;
+  z-index: 10000 !important;
+}
+
+/* 4. Botón de cierre en la esquina superior derecha de la tarjeta */
+.btn-cerrar {
+  position: absolute !important;
+  top: 12px !important;
+  right: 12px !important;
+  z-index: 10001 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  margin: 0 !important;
+}
+
+/* Fondo decorativo sin bloquear interacción */
+.estrella, .corazon-flotante, .flor-amarilla {
+  pointer-events: none !important;
+}
