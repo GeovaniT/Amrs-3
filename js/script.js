@@ -136,6 +136,9 @@ function lluviaSorpresa() {
   }
 }
 
+setTimeout(()=>document.getElementById("textoFinal").innerHTML="TE AMO 💖",10000);
+
+
 // FUNCIÓN DE CIERRE (Obligatoria para que el botón funcione)
 function cerrarMensaje() {
   const overlay = document.getElementById("overlay");
@@ -149,4 +152,44 @@ function cerrarMensaje() {
   setTimeout(() => {
     document.querySelectorAll(".elemento-lluvia").forEach(el => el.remove());
   }, 5000);
+}
+
+for(let i=0;i<20;i++){
+  const d=document.createElement("div");
+  d.className="destello";
+  d.style.top=Math.random()*100+"vh";
+  d.style.left=Math.random()*100+"vw";
+  document.body.appendChild(d);
+}
+
+
+// Escucha el click en el corazón principal
+document.getElementById("corazonPrincipal").addEventListener("click", () => {
+  for (let i = 0; i < 8; i++) {
+    const mini = document.createElement("div");
+    mini.className = "corazon-explosion";
+    mini.innerHTML = "❤️";
+
+    // Posición inicial cerca del corazón principal
+    const rect = document.getElementById("corazonPrincipal").getBoundingClientRect();
+    mini.style.left = rect.left + rect.width/2 + (Math.random()*60-30) + "px";
+    mini.style.top = rect.top + window.scrollY + (Math.random()*60-30) + "px";
+
+    document.body.appendChild(mini);
+
+    setTimeout(() => mini.remove(), 1500);
+  }
+});
+
+// Detecta clic en la tarjeta del mensaje final
+const mensajeFinal = document.getElementById("mensajeFinal");
+if(mensajeFinal){
+  mensajeFinal.addEventListener("click", () => {
+    const corazon = document.querySelector("#mensajeFinal .linea-1"); 
+    if(corazon){
+      corazon.classList.add("pulso");
+      // Quita la clase después de la animación para poder repetirla
+      setTimeout(()=>corazon.classList.remove("pulso"),600);
+    }
+  });
 }
