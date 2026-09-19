@@ -104,7 +104,9 @@ function crearFlor() {
 }
 setInterval(crearFlor, 3000);
 
-// Abrir tarjeta y lluvia
+// Variable global para guardar la referencia del intervalo
+let intervaloLluvia = null;
+
 function lluviaSorpresa() {
   const overlay = document.getElementById("overlay");
   const mensajeFinal = document.getElementById("mensajeFinal");
@@ -113,28 +115,38 @@ function lluviaSorpresa() {
   if (mensajeFinal) mensajeFinal.style.display = "block";
 
   const esMovil = window.innerWidth < 600;
-  const totalElementos = esMovil ? 25 : 50;
+  // Frecuencia de aparición (en milisegundos): más lento en móviles para no ralentizar la pantalla
+  const frecuencia = esMovil ? 250 : 150;
 
-  for (let e = 0; e < totalElementos; e++) {
-    setTimeout(() => {
-      if (!mensajeFinal || mensajeFinal.style.display === "none") return;
+  // Si ya había un intervalo activo, lo limpiamos antes de iniciar uno nuevo
+  if (intervaloLluvia) clearInterval(intervaloLluvia);
 
-      const t = document.createElement("div");
-      t.className = "elemento-lluvia";
-      t.style.position = "fixed";
-      t.style.pointerEvents = "none"; // CRÍTICO: Evita bloqueo táctil
-      t.style.left = Math.random() * 90 + "vw";
-      t.style.zIndex = "999";
-      
-      const azar = Math.random();
-      t.innerHTML = azar < 0.33 ? "❤️" : azar < 0.66 ? "✨" : "🌹";
+  // Iniciar la lluvia continua
+  intervaloLluvia = setInterval(() => {
+    // Si el mensaje se cierra o se oculta, detenemos la lluvia automáticamente
+    if (!mensajeFinal || mensajeFinal.style.display === "none") {
+      clearInterval(intervaloLluvia);
+      return;
+    }
 
-      document.body.appendChild(t);
+    const t = document.createElement("div");
+    t.className = "elemento-lluvia";
+    t.style.position = "fixed";
+    t.style.pointerEvents = "none"; // Evita bloqueo táctil
+    t.style.left = Math.random() * 90 + "vw";
+    t.style.zIndex = "999";
+    
+    const azar = Math.random();
+    t.innerHTML = azar < 0.33 ? "❤️" : azar < 0.66 ? "✨" : "🌹";
 
-      setTimeout(() => { t.remove(); }, 6000);
-    }, (esMovil ? 180 : 120) * e);
-  }
+    document.body.appendChild(t);
+
+    // Cada elemento individual desaparece después de su animación (6 segundos)
+    setTimeout(() => { t.remove(); }, 6000);
+
+  }, frecuencia);
 }
+
 
 setTimeout(()=>document.getElementById("textoFinal").innerHTML="TE AMO 💖",10000);
 
@@ -193,3 +205,17 @@ if(mensajeFinal){
     }
   });
 }
+
+
+const audio = document.getElementById('miMusica');
+  const boton = document.getElementById('btnMusica');
+
+  boton.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play();
+      boton.textContent = 'Pausar música';
+    } else {
+      audio.pause();
+      boton.textContent = 'Reproducir música';
+    }
+  });
